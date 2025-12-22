@@ -1,30 +1,30 @@
-// ==================== Card Flip Functionality ====================
-const cardWrapper = document.getElementById('cardWrapper');
+// ==================== Card Opening Functionality ====================
+const cardBook = document.getElementById('cardBook');
 const celebrateBtn = document.getElementById('celebrateBtn');
 const confettiContainer = document.getElementById('confettiContainer');
 const ageNumber = document.getElementById('ageNumber');
 
-let isFlipped = false;
+let isOpened = false;
 
-// Flip card on click
-cardWrapper.addEventListener('click', (e) => {
-    // Don't flip if clicking the celebrate button
+// Open/close card on click
+cardBook.addEventListener('click', (e) => {
+    // Don't toggle if clicking the celebrate button
     if (e.target.closest('#celebrateBtn')) {
         return;
     }
-    
-    isFlipped = !isFlipped;
-    cardWrapper.classList.toggle('flipped');
-    
-    // Play flip sound effect (optional - can be added with Web Audio API)
-    playFlipSound();
+
+    isOpened = !isOpened;
+    cardBook.classList.toggle('opened');
+
+    // Play opening sound effect
+    playOpenSound();
 });
 
 // ==================== Confetti Animation ====================
 function createConfetti() {
-    const colors = ['#ffd700', '#ff6b9d', '#667eea', '#f5576c', '#764ba2', '#ffd89b'];
-    const confettiCount = 50;
-    
+    const colors = ['#ffd700', '#f4c430', '#daa520', '#ffeb3b', '#ffc107', '#ffb300'];
+    const confettiCount = 60;
+
     for (let i = 0; i < confettiCount; i++) {
         setTimeout(() => {
             const confetti = document.createElement('div');
@@ -33,11 +33,11 @@ function createConfetti() {
             confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
             confetti.style.animationDelay = Math.random() * 0.5 + 's';
             confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
-            
+
             // Random shapes
             const shapes = ['circle', 'square', 'triangle'];
             const shape = shapes[Math.floor(Math.random() * shapes.length)];
-            
+
             if (shape === 'circle') {
                 confetti.style.borderRadius = '50%';
             } else if (shape === 'triangle') {
@@ -48,9 +48,9 @@ function createConfetti() {
                 confetti.style.borderBottom = `10px solid ${confetti.style.background}`;
                 confetti.style.background = 'transparent';
             }
-            
+
             confettiContainer.appendChild(confetti);
-            
+
             // Remove confetti after animation
             setTimeout(() => {
                 confetti.remove();
@@ -61,7 +61,7 @@ function createConfetti() {
 
 // Celebrate button click
 celebrateBtn.addEventListener('click', (e) => {
-    e.stopPropagation(); // Prevent card flip
+    e.stopPropagation(); // Prevent card from opening/closing
     createConfetti();
     animateCelebration();
 });
@@ -70,11 +70,11 @@ celebrateBtn.addEventListener('click', (e) => {
 function animateCelebration() {
     // Add celebration class for extra animations
     celebrateBtn.style.transform = 'scale(0.95)';
-    
+
     setTimeout(() => {
         celebrateBtn.style.transform = 'scale(1)';
     }, 200);
-    
+
     // Animate age number
     const currentAge = parseInt(ageNumber.textContent);
     animateNumber(ageNumber, currentAge, currentAge, 1000);
@@ -83,11 +83,11 @@ function animateCelebration() {
 // ==================== Number Animation ====================
 function animateNumber(element, start, end, duration) {
     let startTime = null;
-    
+
     function animate(currentTime) {
         if (!startTime) startTime = currentTime;
         const progress = (currentTime - startTime) / duration;
-        
+
         if (progress < 1) {
             element.style.transform = `scale(${1 + Math.sin(progress * Math.PI * 4) * 0.2})`;
             requestAnimationFrame(animate);
@@ -95,47 +95,47 @@ function animateNumber(element, start, end, duration) {
             element.style.transform = 'scale(1)';
         }
     }
-    
+
     requestAnimationFrame(animate);
 }
 
 // ==================== Sound Effects (Web Audio API) ====================
-function playFlipSound() {
+function playOpenSound() {
     // Create audio context
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    
-    // Create oscillator for flip sound
+
+    // Create oscillator for opening sound
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
-    
+
     oscillator.connect(gainNode);
     gainNode.connect(audioContext.destination);
-    
-    oscillator.frequency.value = isFlipped ? 600 : 400;
+
+    oscillator.frequency.value = isOpened ? 500 : 350;
     oscillator.type = 'sine';
-    
-    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
-    
+
+    gainNode.gain.setValueAtTime(0.25, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+
     oscillator.start(audioContext.currentTime);
-    oscillator.stop(audioContext.currentTime + 0.2);
+    oscillator.stop(audioContext.currentTime + 0.3);
 }
 
 // ==================== Keyboard Accessibility ====================
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
-        if (document.activeElement === cardWrapper) {
-            isFlipped = !isFlipped;
-            cardWrapper.classList.toggle('flipped');
-            playFlipSound();
+        if (document.activeElement === cardBook) {
+            isOpened = !isOpened;
+            cardBook.classList.toggle('opened');
+            playOpenSound();
         }
     }
 });
 
 // Make card focusable
-cardWrapper.setAttribute('tabindex', '0');
-cardWrapper.setAttribute('role', 'button');
-cardWrapper.setAttribute('aria-label', 'Flip birthday card');
+cardBook.setAttribute('tabindex', '0');
+cardBook.setAttribute('role', 'button');
+cardBook.setAttribute('aria-label', 'Open birthday card');
 
 // ==================== Random Age Generator (Optional) ====================
 // Uncomment to randomize age on page load
@@ -144,14 +144,14 @@ cardWrapper.setAttribute('aria-label', 'Flip birthday card');
 //     ageNumber.textContent = randomAge;
 // });
 
-// ==================== Auto-flip on first visit (Optional) ====================
-// Uncomment to auto-flip card after 2 seconds on first load
+// ==================== Auto-open on first visit (Optional) ====================
+// Uncomment to auto-open card after 2 seconds on first load
 // window.addEventListener('load', () => {
 //     setTimeout(() => {
-//         if (!isFlipped) {
-//             isFlipped = true;
-//             cardWrapper.classList.add('flipped');
-//             playFlipSound();
+//         if (!isOpened) {
+//             isOpened = true;
+//             cardBook.classList.add('opened');
+//             playOpenSound();
 //         }
 //     }, 2000);
 // });
@@ -159,31 +159,32 @@ cardWrapper.setAttribute('aria-label', 'Flip birthday card');
 // ==================== Particle Effects on Hover ====================
 let particleInterval;
 
-cardWrapper.addEventListener('mouseenter', () => {
+cardBook.addEventListener('mouseenter', () => {
     particleInterval = setInterval(() => {
         createHoverParticle();
     }, 100);
 });
 
-cardWrapper.addEventListener('mouseleave', () => {
+cardBook.addEventListener('mouseleave', () => {
     clearInterval(particleInterval);
 });
 
 function createHoverParticle() {
     const particle = document.createElement('div');
     particle.style.position = 'absolute';
-    particle.style.width = '4px';
-    particle.style.height = '4px';
-    particle.style.background = '#ffffff';
+    particle.style.width = '5px';
+    particle.style.height = '5px';
+    particle.style.background = '#ffd700';
     particle.style.borderRadius = '50%';
     particle.style.pointerEvents = 'none';
     particle.style.left = Math.random() * 100 + '%';
     particle.style.top = Math.random() * 100 + '%';
-    particle.style.opacity = '0.6';
+    particle.style.opacity = '0.7';
     particle.style.animation = 'particleFade 1s ease-out forwards';
-    
-    cardWrapper.appendChild(particle);
-    
+    particle.style.boxShadow = '0 0 8px rgba(255, 215, 0, 0.6)';
+
+    cardBook.appendChild(particle);
+
     setTimeout(() => {
         particle.remove();
     }, 1000);
@@ -193,7 +194,7 @@ function createHoverParticle() {
 const style = document.createElement('style');
 style.textContent = `
     @keyframes particleFade {
-        0% { opacity: 0.6; transform: scale(1); }
+        0% { opacity: 0.7; transform: scale(1); }
         100% { opacity: 0; transform: scale(2); }
     }
 `;
@@ -206,5 +207,5 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 }
 
 // ==================== Console Easter Egg ====================
-console.log('%c🎉 Happy Birthday! 🎂', 'font-size: 24px; color: #ff6b9d; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
-console.log('%cThis card was made with ❤️ using modern web technologies!', 'font-size: 14px; color: #667eea;');
+console.log('%c🎉 Happy Birthday! 🎂', 'font-size: 24px; color: #daa520; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);');
+console.log('%cThis card was made with ❤️ using modern web technologies!', 'font-size: 14px; color: #f4c430;');
