@@ -628,79 +628,221 @@ body::before {
 }
 
 /* ==================== Responsive Design ==================== */
+
+/* Tablets and smaller laptops */
 @media (max-width: 1024px) {
     .card-book {
-        width: 700px;
-        height: 500px;
+        width: 400px;
+        height: 550px;
     }
 
     .card-page {
-        width: 350px;
-        height: 500px;
+        width: 400px;
+        height: 550px;
     }
 
-    .cover-title,
-    .birthday-title {
-        font-size: 3rem;
+    .cover-image {
+        width: 320px;
+        height: 320px;
+        margin-top: 40px;
     }
 
-    .gift-icon,
-    .cake {
-        font-size: 4rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .card-book {
-        width: 600px;
-        height: 450px;
-    }
-
-    .card-page {
-        width: 300px;
-        height: 450px;
-    }
-
-    .cover-title,
-    .birthday-title {
-        font-size: 2.5rem;
+    .cover-title {
+        font-size: 2.2rem;
     }
 
     .gift-icon {
-        font-size: 3.5rem;
+        font-size: 2.5rem;
+        margin: 8px 0;
     }
 
     .cake {
         font-size: 3.5rem;
     }
 
-    .age-number {
-        font-size: 2.2rem;
+    .birthday-message-arabic {
+        font-size: 0.95rem;
+        max-width: 350px;
+        padding: 0 15px;
     }
 }
 
-@media (max-width: 640px) {
+/* Mobile landscape and small tablets */
+@media (max-width: 768px) {
     .card-book {
-        width: 500px;
-        height: 400px;
+        width: 360px;
+        height: 500px;
     }
 
     .card-page {
-        width: 250px;
-        height: 400px;
+        width: 360px;
+        height: 500px;
     }
 
-    .cover-title,
-    .birthday-title {
+    .cover-image {
+        width: 260px;
+        height: 260px;
+        margin-top: 35px;
+    }
+
+    .cover-title {
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+    }
+
+    .gift-icon {
         font-size: 2rem;
+        margin: 6px 0;
     }
 
-    .birthday-message {
+    .cover-subtitle {
         font-size: 1rem;
+        margin-bottom: 12px;
+    }
+
+    .tap-circle {
+        width: 50px;
+        height: 50px;
+    }
+
+    .tap-text {
+        font-size: 0.85rem;
+    }
+
+    .cake {
+        font-size: 3rem;
+    }
+
+    .birthday-message-arabic {
+        font-size: 0.85rem;
+        max-width: 320px;
+        padding: 0 15px;
+        line-height: 1.8;
     }
 
     .celebrate-btn {
         font-size: 1.1rem;
         padding: 14px 35px;
+    }
+}
+
+/* Mobile portrait */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .card-book {
+        width: 100%;
+        max-width: 340px;
+        height: 480px;
+    }
+
+    .card-page {
+        width: 100%;
+        max-width: 340px;
+        height: 480px;
+    }
+
+    .cover-image {
+        width: 220px;
+        height: 220px;
+        margin-top: 30px;
+        margin-bottom: 8px;
+    }
+
+    .cover-title {
+        font-size: 1.5rem;
+        margin-bottom: 6px;
+    }
+
+    .gift-icon {
+        font-size: 1.8rem;
+        margin: 5px 0;
+    }
+
+    .cover-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+
+    .tap-indicator {
+        margin-top: 8px;
+    }
+
+    .tap-circle {
+        width: 45px;
+        height: 45px;
+    }
+
+    .tap-text {
+        font-size: 0.75rem;
+    }
+
+    .decorative-border {
+        top: 15px;
+        left: 15px;
+        right: 15px;
+        bottom: 15px;
+    }
+
+    .balloon {
+        font-size: 2rem;
+    }
+
+    .cake {
+        font-size: 2.5rem;
+    }
+
+    .birthday-message-arabic {
+        font-size: 0.75rem;
+        max-width: 280px;
+        padding: 0 10px;
+        line-height: 1.7;
+        margin: 15px auto;
+    }
+
+    .celebrate-btn {
+        font-size: 1rem;
+        padding: 12px 30px;
+        margin-top: 15px;
+    }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+    .card-book {
+        max-width: 300px;
+        height: 450px;
+    }
+
+    .card-page {
+        max-width: 300px;
+        height: 450px;
+    }
+
+    .cover-image {
+        width: 180px;
+        height: 180px;
+        margin-top: 25px;
+    }
+
+    .cover-title {
+        font-size: 1.3rem;
+    }
+
+    .gift-icon {
+        font-size: 1.5rem;
+    }
+
+    .birthday-message-arabic {
+        font-size: 0.7rem;
+        max-width: 260px;
+        line-height: 1.6;
+    }
+
+    .celebrate-btn {
+        font-size: 0.9rem;
+        padding: 10px 25px;
     }
 }
