@@ -489,6 +489,18 @@ body::before {
     max-width: 360px;
 }
 
+.birthday-message-arabic {
+    font-size: 1rem;
+    color: var(--text-dark);
+    font-weight: 400;
+    line-height: 1.9;
+    margin: 20px auto;
+    max-width: 400px;
+    text-align: right;
+    direction: rtl;
+    padding: 0 20px;
+}
+
 .age-badge {
     display: inline-block;
     background: linear-gradient(135deg, rgba(255, 215, 0, 0.3) 0%, rgba(244, 196, 48, 0.3) 100%);
