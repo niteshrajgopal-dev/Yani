@@ -169,6 +169,34 @@ body::before {
     padding: 0 10px;
 }
 
+.cover-image {
+    width: 380px;
+    height: 380px;
+    object-fit: cover;
+    object-position: center 20%;
+    border-radius: 50%;
+    border: 5px solid var(--gold);
+    background: linear-gradient(135deg, var(--light-yellow) 0%, var(--cream) 100%);
+    box-shadow: 0 10px 30px rgba(218, 165, 32, 0.5);
+    margin-top: 50px;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 3;
+    animation: imageFloat 3s ease-in-out infinite;
+}
+
+@keyframes imageFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
 .sparkle {
     position: absolute;
     font-size: 2rem;
@@ -216,9 +244,9 @@ body::before {
 
 .cover-title {
     font-family: 'Playfair Display', serif;
-    font-size: 4rem;
+    font-size: 2.5rem;
     color: var(--text-dark);
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     text-shadow:
         2px 2px 4px rgba(255, 255, 255, 0.5),
         0 0 20px rgba(255, 215, 0, 0.3);
@@ -240,8 +268,8 @@ body::before {
 }
 
 .gift-icon {
-    font-size: 5rem;
-    margin: 30px 0;
+    font-size: 3rem;
+    margin: 10px 0;
     animation: giftBounce 1.5s ease-in-out infinite;
     filter: drop-shadow(0 8px 16px rgba(218, 165, 32, 0.4));
     position: relative;
@@ -261,10 +289,10 @@ body::before {
 }
 
 .cover-subtitle {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     color: var(--text-light);
     font-weight: 400;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     position: relative;
     z-index: 3;
 }
@@ -272,14 +300,14 @@ body::before {
 .tap-indicator {
     position: relative;
     display: inline-block;
-    margin-top: 20px;
+    margin-top: 10px;
     z-index: 3;
 }
 
 .tap-circle {
     display: inline-block;
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     border: 3px solid var(--dark-gold);
     border-radius: 50%;
     position: relative;
